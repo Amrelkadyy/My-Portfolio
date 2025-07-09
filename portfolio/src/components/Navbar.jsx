@@ -197,7 +197,7 @@ export const Navbar = () => {
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className={cn(
               "md:hidden relative p-2 rounded-full transition-all duration-300 z-50",
-              "bg-card/80 backdrop-blur-sm border border-border/60",
+              " backdrop-blur-sm border border-border",
               "hover:bg-card hover:scale-110 hover:shadow-lg",
               "focus:outline-none focus:ring-2 focus:ring-primary/50",
               isMenuOpen && "bg-card shadow-lg scale-110"
@@ -277,12 +277,12 @@ export const Navbar = () => {
                     key={key}
                     href={item.href}
                     className={cn(
-                      "relative px-6 py-4 rounded-2xl transition-all duration-300",
+                      "relative px-5 py-3 rounded-2xl transition-all duration-300",
                       "text-lg font-medium tracking-wide text-center",
                       "hover:bg-primary/10 hover:text-primary hover:scale-105",
                       "focus:outline-none focus:ring-2 focus:ring-primary/50",
                       "transform hover:translate-y-[-2px]",
-                      "border border-border/30 bg-card/50 backdrop-blur-sm",
+                    
                       isActive 
                         ? "text-primary bg-primary/10 shadow-lg scale-105 border-primary/30" 
                         : "text-foreground/80"

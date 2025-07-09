@@ -6,19 +6,21 @@ export const ThemeToggle = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        setMounted(true);
-        const storedTheme = localStorage.getItem("theme");
-        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                        
-        if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
-            setIsDarkMode(true);
-            document.documentElement.classList.add("dark");
-        } else {
-            localStorage.setItem("theme", "light");
-            setIsDarkMode(false);
-        }
-    }, []);
+useEffect(() => {
+    setMounted(true);
+    const storedTheme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                            
+    if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
+        setIsDarkMode(true);
+        document.documentElement.classList.add("dark");
+    } else {
+        setIsDarkMode(false);
+        document.documentElement.classList.remove("dark"); // Add this line
+        localStorage.setItem("theme", "light");
+    }
+}, []);
+;
 
     const toggleTheme = () => {
         if (isDarkMode) {
@@ -38,7 +40,7 @@ export const ThemeToggle = () => {
         <button 
             onClick={toggleTheme}
             className={cn(
-                "group fixed z-50 p-[10px] rounded-full transition-all duration-500",
+                "group fixed z-[10001] p-[10px] rounded-full transition-all duration-500",
                 "bg-card/90 backdrop-blur-md border border-border/60",
                 "hover:bg-card hover:scale-110 hover:shadow-2xl active:scale-95",
                 "focus:outline-none focus:ring-2 focus:ring-primary/50",
