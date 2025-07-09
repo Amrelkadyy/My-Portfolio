@@ -263,7 +263,7 @@ export const Navbar = () => {
           )}
         >
           {/* Menu Container */}
-          <div className="w-full max-w-sm mx-auto px-6">
+          <div className="w-full max-w-sm mx-auto px-6 mt-8">
             {/* Decorative elements */}
             <div className="flex justify-center mb-8">
               <Sparkles className="w-8 h-8 text-primary/60 animate-pulse" />
