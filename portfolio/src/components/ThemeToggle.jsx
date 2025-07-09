@@ -38,7 +38,7 @@ export const ThemeToggle = () => {
         <button 
             onClick={toggleTheme}
             className={cn(
-                "group fixed z-50 p-[9.5px] rounded-full transition-all duration-500",
+                "group fixed z-50 p-[10px] rounded-full transition-all duration-500",
                 "bg-card/90 backdrop-blur-md border border-border/60",
                 "hover:bg-card hover:scale-110 hover:shadow-2xl active:scale-95",
                 "focus:outline-none focus:ring-2 focus:ring-primary/50",
@@ -46,7 +46,7 @@ export const ThemeToggle = () => {
                 "hover:shadow-[0_0_25px_rgba(139,92,246,0.3)]",
                 "dark:hover:shadow-[0_0_25px_rgba(167,139,250,0.4)]",
                 // More space between buttons - increased gap
-                "top-4 right-4",
+                "top-3 right-4",
                 "sm:top-5 sm:right-5",
                 "md:right-5 max-md:right-20", // Increased from right-16 to right-20 for more space
                 // Enhanced mobile styles
