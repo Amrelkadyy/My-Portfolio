@@ -10,17 +10,16 @@ useEffect(() => {
     setMounted(true);
     const storedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-                            
+                                
     if (storedTheme === "dark" || (!storedTheme && systemPrefersDark)) {
         setIsDarkMode(true);
         document.documentElement.classList.add("dark");
     } else {
         setIsDarkMode(false);
-        document.documentElement.classList.remove("dark"); // Add this line
+        document.documentElement.classList.remove("dark");
         localStorage.setItem("theme", "light");
     }
 }, []);
-;
 
     const toggleTheme = () => {
         if (isDarkMode) {
@@ -47,10 +46,10 @@ useEffect(() => {
                 // Enhanced glow effects
                 "hover:shadow-[0_0_25px_rgba(139,92,246,0.3)]",
                 "dark:hover:shadow-[0_0_25px_rgba(167,139,250,0.4)]",
-                // More space between buttons - increased gap
-                "top-[0.699rem] right-4",
+                // Fixed positioning - aligned with navbar behavior
+                "top-[0.875rem] right-4", // Adjusted to match navbar py-2/py-3 behavior
                 "sm:top-5 sm:right-5",
-                "md:right-5 max-md:right-20", // Increased from right-16 to right-20 for more space
+                "md:right-5",
                 // Enhanced mobile styles
                 "max-sm:bg-card/95 max-sm:backdrop-blur-lg",
                 "max-sm:border-2 max-sm:border-border/80"
@@ -59,7 +58,7 @@ useEffect(() => {
         >
             {/* Animated background glow */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse-subtle" />
-                        
+                                    
             <div className="relative w-5 h-5 sm:w-6 sm:h-6">
                 <Sun 
                     className={cn(
@@ -82,7 +81,7 @@ useEffect(() => {
                     )}
                 />
             </div>
-                                    
+                                                
             {/* Enhanced tooltip for larger screens */}
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-3 py-2
                             bg-card/95 backdrop-blur-sm border border-border/60 rounded-lg text-sm whitespace-nowrap
@@ -93,7 +92,7 @@ useEffect(() => {
                 {isDarkMode ? '☀️ Light mode' : '🌙 Dark mode'}
                 <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-card/95" />
             </span>
-            
+                        
             {/* Ripple effect on click */}
             <div className="absolute inset-0 rounded-full overflow-hidden">
                 <div className="absolute inset-0 bg-primary/20 rounded-full scale-0 group-active:scale-100 transition-transform duration-200" />

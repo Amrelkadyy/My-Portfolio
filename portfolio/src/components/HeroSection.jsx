@@ -114,7 +114,7 @@ export const HeroSection = () => {
 
       {/* Enhanced Scroll Indicator - Better mobile positioning */}
       <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-0 animate-fade-in-delay-4">
-        <span className="text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2 font-medium">Discover More</span>
+        <span className="mb-2 text-xs sm:text-sm text-muted-foreground mb-1 sm:mb-2 font-medium">Discover More</span>
         <div className="relative">
           <ArrowDown className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           <div className="absolute inset-0 h-5 w-5 sm:h-6 sm:w-6 border-2 border-primary/30 rounded-full animate-ping"></div>
