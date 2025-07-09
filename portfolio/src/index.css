@@ -318,3 +318,58 @@
 .animate-pulse-subtle {
   animation: animate-pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+/* Add these new utilities to your existing CSS */
+
+@utility text-gradient {
+  @apply bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent;
+}
+
+@utility scale-x {
+  transform-origin: left;
+}
+
+/* Enhanced cosmic button with better hover effects */
+@utility cosmic-button {
+  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
+         transition-all duration-300 hover:shadow-[0_0_20px_rgba(139,92,246,0.6)]
+         hover:scale-105 active:scale-95 relative overflow-hidden;
+}
+
+/* Add a subtle glow effect for text */
+@utility text-glow {
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Enhanced floating animation */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  33% { 
+    transform: translateY(-10px) rotate(5deg); 
+  }
+  66% { 
+    transform: translateY(-5px) rotate(-3deg); 
+  }
+}
+
+/* Scale-x animation for the underline */
+@keyframes scale-x {
+  from { 
+    transform: scaleX(0); 
+  }
+  to { 
+    transform: scaleX(1); 
+  }
+}
+
+/* Add backdrop blur utility */
+@utility backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Enhanced card styling */
+@utility card-enhanced {
+  @apply bg-card/30 backdrop-blur-sm border border-border/50 rounded-lg
+         transition-all duration-300 hover:bg-card/50 hover:border-border;
+}
