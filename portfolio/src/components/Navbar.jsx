@@ -24,7 +24,7 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
-      
+            
       // Active section detection
       const sections = navItems.map(item => item.href.substring(1));
       const currentSection = sections.find(section => {
@@ -35,7 +35,7 @@ export const Navbar = () => {
         }
         return false;
       });
-      
+            
       if (currentSection) {
         setActiveSection(currentSection);
       }
@@ -61,11 +61,11 @@ export const Navbar = () => {
 
     handleScroll();
     checkTheme();
-    
+        
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("scroll", handleScrollClose);
     window.addEventListener("resize", handleResize);
-    
+        
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, {
       attributes: true,
@@ -87,7 +87,6 @@ export const Navbar = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
-
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -102,7 +101,6 @@ export const Navbar = () => {
         const navHeight = 80; // Adjust based on your navbar height
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
         const offsetPosition = elementPosition - navHeight;
-
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
@@ -115,15 +113,15 @@ export const Navbar = () => {
     <>
       <nav
         className={cn(
-          "fixed w-full z-50 transition-all duration-500",
+          "fixed w-full z-50 py-3 sm:py-4",
           isScrolled 
-            ? "py-2 bg-background/90 backdrop-blur-xl shadow-lg border-b border-border/50" 
-            : "py-3 sm:py-4 bg-transparent"
+            ? "bg-background/90 backdrop-blur-xl shadow-lg border-b border-border/50"
+            : "bg-transparent"
         )}
       >
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        
+                
         <div className="container relative flex items-center justify-between px-4 sm:px-6">
           {/* Logo with enhanced styling */}
           <a 
@@ -147,7 +145,7 @@ export const Navbar = () => {
               {/* Logo glow effect */}
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
-            
+                        
             {/* Optional: Add your name/title next to logo */}
             <div className="hidden sm:block">
               <div className="text-base md:text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
@@ -173,18 +171,18 @@ export const Navbar = () => {
                     "text-sm font-medium tracking-wide",
                     "hover:bg-primary/10 hover:text-primary",
                     "focus:outline-none focus:ring-2 focus:ring-primary/50",
-                    isActive 
-                      ? "text-primary bg-primary/10 shadow-lg" 
+                    isActive
+                      ? "text-primary bg-primary/10 shadow-lg"
                       : "text-foreground/80"
                   )}
                 >
                   {item.name}
-                  
+                                    
                   {/* Active indicator */}
                   {isActive && (
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full animate-pulse" />
                   )}
-                  
+                                    
                   {/* Hover effect */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 hover:opacity-100 transition-opacity duration-300" />
                 </a>
@@ -220,12 +218,12 @@ export const Navbar = () => {
                 )}
               />
             </div>
-            
+                        
             {/* Button glow effect */}
             <div className="absolute inset-0 rounded-full bg-primary/20 opacity-0 hover:opacity-100 transition-opacity duration-300" />
           </button>
         </div>
-        
+                
         {/* Bottom border animation */}
         <div className={cn(
           "absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-all duration-500",
@@ -250,7 +248,7 @@ export const Navbar = () => {
           )}
           onClick={() => setIsMenuOpen(false)}
         />
-        
+                
         {/* Menu Content */}
         <div 
           className={cn(
@@ -258,7 +256,7 @@ export const Navbar = () => {
             "flex flex-col items-center justify-center",
             "transition-all duration-300 ease-out",
             isMenuOpen 
-              ? "opacity-100 scale-100 translate-y-0" 
+              ? "opacity-100 scale-100 translate-y-0"
               : "opacity-0 scale-95 -translate-y-4"
           )}
         >
@@ -268,7 +266,7 @@ export const Navbar = () => {
             <div className="flex justify-center mb-8">
               <Sparkles className="w-8 h-8 text-primary/60 animate-pulse" />
             </div>
-            
+                        
             <div className="flex flex-col space-y-4">
               {navItems.map((item, key) => {
                 const isActive = activeSection === item.href.substring(1);
@@ -282,9 +280,9 @@ export const Navbar = () => {
                       "hover:bg-primary/10 hover:text-primary hover:scale-105",
                       "focus:outline-none focus:ring-2 focus:ring-primary/50",
                       "transform hover:translate-y-[-2px]",
-                    
-                      isActive 
-                        ? "text-primary bg-primary/10 shadow-lg scale-105 border-primary/30" 
+                                          
+                      isActive
+                        ? "text-primary bg-primary/10 shadow-lg scale-105 border-primary/30"
                         : "text-foreground/80"
                     )}
                     onClick={(e) => {
@@ -297,19 +295,19 @@ export const Navbar = () => {
                     }}
                   >
                     {item.name}
-                    
+                                        
                     {/* Active indicator for mobile */}
                     {isActive && (
                       <div className="absolute right-4 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full animate-pulse" />
                     )}
-                    
+                                        
                     {/* Hover glow effect */}
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/10 to-primary/5 opacity-0 hover:opacity-100 transition-opacity duration-300" />
                   </a>
                 );
               })}
             </div>
-            
+                        
             {/* Bottom decorative element */}
             <div className="flex justify-center mt-8">
               <div className="w-16 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent rounded-full" />

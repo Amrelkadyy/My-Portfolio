@@ -48,7 +48,7 @@ useEffect(() => {
                 "hover:shadow-[0_0_25px_rgba(139,92,246,0.3)]",
                 "dark:hover:shadow-[0_0_25px_rgba(167,139,250,0.4)]",
                 // More space between buttons - increased gap
-                "top-[0.5rem] right-4",
+                "top-[0.788rem] right-4",
                 "sm:top-5 sm:right-5",
                 "md:right-5 max-md:right-20", // Increased from right-16 to right-20 for more space
                 // Enhanced mobile styles
