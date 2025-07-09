@@ -114,16 +114,17 @@
     }
   }
 
-  @keyframes slideInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 
   @keyframes animate-pulse-subtle {
     0%, 100% {
@@ -358,4 +359,225 @@
     rgba(139, 92, 246, 0.1) 0%,
     rgba(167, 139, 250, 0.05) 50%,
     transparent 100%);
+}
+/* Prevent scroll when menu is open */
+.menu-open {
+  overflow: hidden !important;
+}
+
+/* Prevent scroll when menu is open */
+.menu-open {
+  overflow: hidden !important;
+}
+
+/* Enhanced mobile menu styling */
+@media (max-width: 767px) {
+  .mobile-menu-item {
+    @apply w-full text-center py-4 px-6 rounded-xl;
+    @apply bg-card/60 backdrop-blur-sm border border-border/40;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:bg-primary/10 hover:border-primary/30;
+    @apply active:scale-95;
+  }
+  
+  .mobile-menu-item.active {
+    @apply bg-primary/15 border-primary/40 text-primary;
+    @apply shadow-lg shadow-primary/10;
+  }
+}
+/* Improved responsive text sizing */
+@media (max-width: 640px) {
+  .nav-logo {
+    height: 2rem; /* 32px */
+  }
+  
+  .nav-title {
+    font-size: 0.875rem; /* 14px */
+  }
+  
+  .mobile-menu-text {
+    font-size: 1rem; /* 16px */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .nav-logo {
+    height: 2.5rem; /* 40px */
+  }
+  
+  .nav-title {
+    font-size: 1rem; /* 16px */
+  }
+  
+  .mobile-menu-text {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+/* Enhanced mobile menu container */
+@media (max-width: 767px) {
+  .mobile-menu-container {
+    @apply pt-20 pb-8 px-4;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+  
+  .mobile-menu-content {
+    @apply max-w-sm mx-auto;
+  }
+  
+  .mobile-menu-items {
+    @apply space-y-3;
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+    overflow-y: auto;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+@utility smooth-transition {
+  @apply transition-all duration-300 ease-out;
+}
+
+/* Enhanced focus states for accessibility */
+@utility focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+}
+
+/* Improved button states */
+@utility button-press {
+  @apply active:scale-95 transition-transform duration-150;
+}
+
+/* Safe area padding for mobile devices with notches */
+@supports (padding: max(0px)) {
+  .mobile-menu-container {
+    padding-top: max(5rem, env(safe-area-inset-top) + 1rem);
+    padding-bottom: max(2rem, env(safe-area-inset-bottom) + 1rem);
+    padding-left: max(1rem, env(safe-area-inset-left) + 1rem);
+    padding-right: max(1rem, env(safe-area-inset-right) + 1rem);
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  .mobile-menu-backdrop {
+    @apply fixed inset-0 bg-background/95 backdrop-blur-xl;
+    touch-action: none; /* Prevent scroll behind menu */
+  }
+}
+
+/* Enhanced animation timing */
+.stagger-animation {
+  animation-fill-mode: both;
+}
+
+.stagger-animation:nth-child(1) { animation-delay: 0ms; }
+.stagger-animation:nth-child(2) { animation-delay: 50ms; }
+.stagger-animation:nth-child(3) { animation-delay: 100ms; }
+.stagger-animation:nth-child(4) { animation-delay: 150ms; }
+.stagger-animation:nth-child(5) { animation-delay: 200ms; }
+.stagger-animation:nth-child(6) { animation-delay: 250ms; }
+.stagger-animation:nth-child(7) { animation-delay: 300ms; }
+.stagger-animation:nth-child(8) { animation-delay: 350ms; }
+
+/* Improved scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Account for fixed navbar */
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 4rem;
+  }
+}
+
+/* Enhanced mobile menu item hover effects */
+@media (max-width: 767px) {
+  .mobile-menu-item:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-menu-item:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* Improved backdrop filter support */
+@supports (backdrop-filter: blur(12px)) {
+  .backdrop-blur-enhanced {
+    backdrop-filter: blur(12px);
+  }
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-enhanced {
+    background-color: rgba(var(--background), 0.95);
+  }
+}
+
+/* Enhanced mobile navigation z-index management */
+.mobile-nav-overlay {
+  z-index: 9999;
+}
+
+.mobile-nav-content {
+  z-index: 10000;
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 767px) {
+  .touch-target {
+    min-height: 44px; /* iOS recommended minimum */
+    min-width: 44px;
+  }
+  
+  .mobile-menu-item {
+    min-height: 48px; /* Comfortable touch target */
+  }
+}
+
+/* Enhanced loading states */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Responsive utility classes */
+@utility mobile-only {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+@utility desktop-only {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+/* Enhanced error states */
+.error-state {
+  @apply text-red-500 border-red-500/50 bg-red-500/10;
+}
+
+/* Improved success states */
+.success-state {
+  @apply text-green-500 border-green-500/50 bg-green-500/10;
 }
