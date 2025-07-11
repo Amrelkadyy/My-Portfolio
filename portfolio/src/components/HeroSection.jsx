@@ -86,12 +86,7 @@ export const HeroSection = () => {
               <span className="relative z-10">View My Work</span>
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
-            <a 
-              href="#contact" 
-              className="px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg font-semibold border-2 border-primary/30 rounded-full text-primary hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 active:scale-95 w-full sm:w-auto max-w-xs"
-            >
-              Get In Touch
-            </a>
+      
           </div>
 
           {/* Stats or Quick Info - Better mobile grid */}

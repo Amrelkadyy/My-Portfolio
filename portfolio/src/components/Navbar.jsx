@@ -138,7 +138,7 @@ export const Navbar = () => {
                 alt="Logo"
                 className={cn(
                   "transition-all duration-500",
-                  "h-8 w-auto sm:h-10 md:h-12",
+                  "h-8 w-auto sm:h-10 md:h-10 lg:h-12",
                   "group-hover:drop-shadow-lg"
                 )}
               />
@@ -147,9 +147,9 @@ export const Navbar = () => {
             </div>
                         
             {/* Optional: Add your name/title next to logo */}
-            <div className="hidden sm:block">
+            <div className="hidden lg:block xl:block">
               <div className="text-base md:text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Portfolio
+                BY AMR
               </div>
             </div>
           </a>
