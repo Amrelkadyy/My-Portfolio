@@ -7,7 +7,7 @@
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
   --color-card: hsl(var(--card));
-  
+
   /* Enhanced animations */
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
@@ -114,17 +114,16 @@
     }
   }
 
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 
   @keyframes animate-pulse-subtle {
     0%, 100% {
@@ -144,17 +143,58 @@
     }
   }
 
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
-  50% {
-    background-position: 100% 50%;
+
+  @keyframes grow {
+    from {
+      width: 0%;
+    }
+    to {
+      width: var(--target-width);
+    }
   }
-  100% {
-    background-position: 0% 50%;
+
+  @keyframes skill-glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    }
   }
-}
+
+  @keyframes progress-fill {
+    0% {
+      width: 0%;
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      width: var(--progress-width);
+      opacity: 1;
+    }
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
 }
 
 @layer base {
@@ -182,6 +222,7 @@
 
   html {
     @apply scroll-smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -206,6 +247,10 @@
       padding-top: 6rem;
       min-height: calc(100vh - 4rem);
     }
+
+    html {
+      scroll-padding-top: 4rem;
+    }
   }
 
   @media (min-width: 640px) {
@@ -215,7 +260,7 @@
   }
 }
 
-/* All @utility directives at root level */
+/* Utility classes */
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
@@ -238,7 +283,7 @@
 }
 
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+  @apply transition-transform duration-300;
 }
 
 @utility gradient-border {
@@ -250,8 +295,7 @@
 
 @utility cosmic-button {
   @apply px-4 py-2 sm:px-6 sm:py-2 rounded-full bg-primary text-primary-foreground font-medium
-         transition-all duration-300 hover:shadow-[0_0_15px_rgba(139,92,246,0.6)]
-         hover:scale-105 active:scale-95 relative overflow-hidden;
+         transition-all duration-300 relative overflow-hidden;
   @media (min-width: 640px) {
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
   }
@@ -305,10 +349,10 @@
 
 @utility text-gradient {
   background: linear-gradient(90deg, 
-    hsl(var(--primary)) 0%, 
-    rgb(168, 85, 247) 25%, 
-    rgb(236, 72, 153) 50%, 
-    rgb(168, 85, 247) 75%, 
+    hsl(var(--primary)) 0%,
+    rgb(168, 85, 247) 25%,
+    rgb(236, 72, 153) 50%,
+    rgb(168, 85, 247) 75%,
     hsl(var(--primary)) 100%
   );
   background-size: 200% 100%;
@@ -318,6 +362,7 @@
   color: transparent;
   animation: gradient-shift 3s ease infinite;
 }
+
 @utility scale-x {
   transform-origin: left;
 }
@@ -331,288 +376,9 @@
 
 @utility card-enhanced {
   @apply bg-card/30 backdrop-blur-sm border border-border/50 rounded-lg
-         transition-all duration-300 hover:bg-card/50 hover:border-border;
+         transition-all duration-300;
 }
 
-/* Dark mode specific styles */
-.dark .star {
-  background: radial-gradient(circle,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 50%,
-    rgba(167, 139, 250, 0.4) 100%);
-  box-shadow:
-    0 0 6px 2px rgba(255, 255, 255, 0.6),
-    0 0 12px 4px rgba(167, 139, 250, 0.4),
-    0 0 18px 6px rgba(139, 92, 246, 0.2);
-}
-
-.dark .meteor {
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(167, 139, 250, 0.9) 30%,
-    rgba(139, 92, 246, 0.7) 60%,
-    transparent 100%);
-  box-shadow:
-    0 0 10px 3px rgba(255, 255, 255, 0.8),
-    0 0 20px 6px rgba(167, 139, 250, 0.6),
-    0 0 30px 9px rgba(139, 92, 246, 0.4);
-}
-
-.dark .shooting-star {
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 50%,
-    transparent 100%);
-  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
-}
-
-.dark .nebula {
-  background: radial-gradient(ellipse,
-    rgba(139, 92, 246, 0.1) 0%,
-    rgba(167, 139, 250, 0.05) 50%,
-    transparent 100%);
-}
-/* Prevent scroll when menu is open */
-.menu-open {
-  overflow: hidden !important;
-}
-
-/* Prevent scroll when menu is open */
-.menu-open {
-  overflow: hidden !important;
-}
-
-/* Enhanced mobile menu styling */
-@media (max-width: 767px) {
-  .mobile-menu-item {
-    @apply w-full text-center py-4 px-6 rounded-xl;
-    @apply bg-card/60 backdrop-blur-sm border border-border/40;
-    @apply transition-all duration-300 ease-out;
-    @apply hover:bg-primary/10 hover:border-primary/30;
-    @apply active:scale-95;
-  }
-  
-  .mobile-menu-item.active {
-    @apply bg-primary/15 border-primary/40 text-primary;
-    @apply shadow-lg shadow-primary/10;
-  }
-}
-/* Improved responsive text sizing */
-@media (max-width: 640px) {
-  .nav-logo {
-    height: 2rem; /* 32px */
-  }
-  
-  .nav-title {
-    font-size: 0.875rem; /* 14px */
-  }
-  
-  .mobile-menu-text {
-    font-size: 1rem; /* 16px */
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .nav-logo {
-    height: 2.5rem; /* 40px */
-  }
-  
-  .nav-title {
-    font-size: 1rem; /* 16px */
-  }
-  
-  .mobile-menu-text {
-    font-size: 1.125rem; /* 18px */
-  }
-}
-
-/* Enhanced mobile menu container */
-@media (max-width: 767px) {
-  .mobile-menu-container {
-    @apply pt-20 pb-8 px-4;
-    min-height: 100vh;
-    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
-  }
-  
-  .mobile-menu-content {
-    @apply max-w-sm mx-auto;
-  }
-  
-  .mobile-menu-items {
-    @apply space-y-3;
-    max-height: calc(100vh - 200px);
-    max-height: calc(100dvh - 200px);
-    overflow-y: auto;
-  }
-}
-
-/* Smooth transitions for all interactive elements */
-@utility smooth-transition {
-  @apply transition-all duration-300 ease-out;
-}
-
-/* Enhanced focus states for accessibility */
-@utility focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
-}
-
-/* Improved button states */
-@utility button-press {
-  @apply active:scale-95 transition-transform duration-150;
-}
-
-/* Safe area padding for mobile devices with notches */
-@supports (padding: max(0px)) {
-  .mobile-menu-container {
-    padding-top: max(5rem, env(safe-area-inset-top) + 1rem);
-    padding-bottom: max(2rem, env(safe-area-inset-bottom) + 1rem);
-    padding-left: max(1rem, env(safe-area-inset-left) + 1rem);
-    padding-right: max(1rem, env(safe-area-inset-right) + 1rem);
-  }
-}
-
-/* Prevent horizontal scroll on mobile */
-@media (max-width: 767px) {
-  body {
-    overflow-x: hidden;
-  }
-  
-  .mobile-menu-backdrop {
-    @apply fixed inset-0 bg-background/95 backdrop-blur-xl;
-    touch-action: none; /* Prevent scroll behind menu */
-  }
-}
-
-/* Enhanced animation timing */
-.stagger-animation {
-  animation-fill-mode: both;
-}
-
-.stagger-animation:nth-child(1) { animation-delay: 0ms; }
-.stagger-animation:nth-child(2) { animation-delay: 50ms; }
-.stagger-animation:nth-child(3) { animation-delay: 100ms; }
-.stagger-animation:nth-child(4) { animation-delay: 150ms; }
-.stagger-animation:nth-child(5) { animation-delay: 200ms; }
-.stagger-animation:nth-child(6) { animation-delay: 250ms; }
-.stagger-animation:nth-child(7) { animation-delay: 300ms; }
-.stagger-animation:nth-child(8) { animation-delay: 350ms; }
-
-/* Improved scroll behavior */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 5rem; /* Account for fixed navbar */
-}
-
-@media (max-width: 767px) {
-  html {
-    scroll-padding-top: 4rem;
-  }
-}
-
-/* Enhanced mobile menu item hover effects */
-@media (max-width: 767px) {
-  .mobile-menu-item:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .mobile-menu-item:active {
-    transform: translateY(0) scale(0.98);
-  }
-}
-
-/* Improved backdrop filter support */
-@supports (backdrop-filter: blur(12px)) {
-  .backdrop-blur-enhanced {
-    backdrop-filter: blur(12px);
-  }
-}
-
-@supports not (backdrop-filter: blur(12px)) {
-  .backdrop-blur-enhanced {
-    background-color: rgba(var(--background), 0.95);
-  }
-}
-
-/* Enhanced mobile navigation z-index management */
-.mobile-nav-overlay {
-  z-index: 40;
-}
-
-.mobile-nav-content {
-  z-index: 41;
-}
-
-/* Improved touch targets for mobile */
-@media (max-width: 767px) {
-  .touch-target {
-    min-height: 44px; /* iOS recommended minimum */
-    min-width: 44px;
-  }
-  
-  .mobile-menu-item {
-    min-height: 48px; /* Comfortable touch target */
-  }
-}
-
-/* Enhanced loading states */
-@keyframes skeleton-loading {
-  0% {
-    background-position: -200px 0;
-  }
-  100% {
-    background-position: calc(200px + 100%) 0;
-  }
-}
-
-.skeleton {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  background-size: 200px 100%;
-  animation: skeleton-loading 1.5s infinite;
-}
-
-/* Responsive utility classes */
-@utility mobile-only {
-  @media (min-width: 768px) {
-    display: none !important;
-  }
-}
-
-@utility desktop-only {
-  @media (max-width: 767px) {
-    display: none !important;
-  }
-}
-
-/* Enhanced error states */
-.error-state {
-  @apply text-red-500 border-red-500/50 bg-red-500/10;
-}
-
-/* Improved success states */
-.success-state {
-  @apply text-green-500 border-green-500/50 bg-green-500/10;
-}
-/* Add these keyframes to your existing @theme section */
-@keyframes grow {
-  from {
-    width: 0%;
-  }
-  to {
-    width: var(--target-width);
-  }
-}
-
-@keyframes skill-glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(139, 92, 246, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
-  }
-}
-
-/* Add these utility classes to your existing utilities */
 @utility skill-bar {
   @apply relative overflow-hidden;
   animation: grow 1.5s ease-out forwards;
@@ -623,35 +389,6 @@ html {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@utility skill-card:hover {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-/* Enhanced mobile responsiveness for skills */
-@media (max-width: 640px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .skill-card {
-    padding: 1rem;
-  }
-  
-  .skill-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  
-  .skill-icon {
-    width: 1rem;
-    height: 1rem;
-  }
-}
-
-/* Skill level color variations */
 @utility skill-expert {
   @apply bg-gradient-to-r from-green-500 to-emerald-600;
   box-shadow: 0 2px 10px rgba(34, 197, 94, 0.3);
@@ -677,41 +414,71 @@ html {
   box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
 }
 
-/* Enhanced category button animations */
 @utility category-button {
   @apply relative overflow-hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@utility category-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
-@utility category-button:hover::before {
-  left: 100%;
-}
-
-/* Skill card hover effects */
 @utility skill-card-enhanced {
   @apply relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@utility skill-card-enhanced:hover {
+@utility progress-animated {
+  animation: progress-fill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@utility smooth-transition {
+  @apply transition-all duration-300 ease-out;
+}
+@utility focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+}
+
+@utility button-press {
+  @apply active:scale-95 transition-transform duration-150;
+}
+
+@utility mobile-only {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+@utility desktop-only {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+/* Regular CSS classes for hover states and complex selectors */
+.card-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.cosmic-button:hover {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+  transform: scale(1.05);
+}
+
+.cosmic-button:active {
+  transform: scale(0.95);
+}
+
+.skill-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card-enhanced:hover {
   transform: translateY(-8px) scale(1.03);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.1),
     0 0 20px rgba(139, 92, 246, 0.1);
 }
 
-@utility skill-card-enhanced::after {
+.skill-card-enhanced::after {
   content: '';
   position: absolute;
   top: 0;
@@ -725,64 +492,203 @@ html {
   border-radius: inherit;
 }
 
-@utility skill-card-enhanced:hover::after {
+.skill-card-enhanced:hover::after {
   opacity: 1;
 }
 
-/* Progress bar animations */
-@keyframes progress-fill {
-  0% {
-    width: 0%;
-    opacity: 0.5;
+.category-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.category-button:hover::before {
+  left: 100%;
+}
+
+.card-enhanced:hover {
+  background: hsl(var(--card) / 0.5);
+  border-color: hsl(var(--border));
+}
+
+/* Prevent scroll when menu is open */
+.menu-open {
+  overflow: hidden !important;
+}
+
+/* Enhanced mobile menu styling */
+@media (max-width: 767px) {
+  .mobile-menu-item {
+    @apply w-full text-center py-4 px-6 rounded-xl;
+    @apply bg-card/60 backdrop-blur-sm border border-border/40;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:bg-primary/10 hover:border-primary/30;
+    @apply active:scale-95;
   }
-  50% {
-    opacity: 1;
+
+  .mobile-menu-item.active {
+    @apply bg-primary/15 border-primary/40 text-primary;
+    @apply shadow-lg shadow-primary/10;
   }
-  100% {
-    width: var(--progress-width);
-    opacity: 1;
+
+  .mobile-menu-item:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-menu-item:active {
+    transform: translateY(0) scale(0.98);
   }
 }
 
-@utility progress-animated {
-  animation: progress-fill 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+/* Improved responsive text sizing */
+@media (max-width: 640px) {
+  .nav-logo {
+    height: 2rem;
+  }
+
+  .nav-title {
+    font-size: 0.875rem;
+  }
+
+  .mobile-menu-text {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .nav-logo {
+    height: 2.5rem;
+  }
+
+  .nav-title {
+    font-size: 1rem;
+  }
+
+  .mobile-menu-text {
+    font-size: 1.125rem;
+  }
+}
+
+/* Enhanced mobile menu container */
+@media (max-width: 767px) {
+  .mobile-menu-container {
+    @apply pt-20 pb-8 px-4;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .mobile-menu-content {
+    @apply max-w-sm mx-auto;
+  }
+
+  .mobile-menu-items {
+    @apply space-y-3;
+    max-height: calc(100vh - 200px);
+    max-height: calc(100dvh - 200px);
+    overflow-y: auto;
+  }
+}
+
+/* Safe area padding for mobile devices with notches */
+@supports (padding: max(0px)) {
+  .mobile-menu-container {
+    padding-top: max(5rem, env(safe-area-inset-top) + 1rem);
+    padding-bottom: max(2rem, env(safe-area-inset-bottom) + 1rem);
+    padding-left: max(1rem, env(safe-area-inset-left) + 1rem);
+    padding-right: max(1rem, env(safe-area-inset-right) + 1rem);
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .mobile-menu-backdrop {
+    @apply fixed inset-0 bg-background/95 backdrop-blur-xl;
+    touch-action: none;
+  }
+}
+
+/* Enhanced animation timing */
+.stagger-animation {
+  animation-fill-mode: both;
+}
+
+.stagger-animation:nth-child(1) { animation-delay: 0ms; }
+.stagger-animation:nth-child(2) { animation-delay: 50ms; }
+.stagger-animation:nth-child(3) { animation-delay: 100ms; }
+.stagger-animation:nth-child(4) { animation-delay: 150ms; }
+.stagger-animation:nth-child(5) { animation-delay: 200ms; }
+.stagger-animation:nth-child(6) { animation-delay: 250ms; }
+.stagger-animation:nth-child(7) { animation-delay: 300ms; }
+.stagger-animation:nth-child(8) { animation-delay: 350ms; }
+
+/* Enhanced mobile responsiveness for skills */
+@media (max-width: 640px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skill-card {
+    padding: 1rem;
+  }
+
+  .skill-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .skill-icon {
+    width: 1rem;
+    height: 1rem;
+  }
 }
 
 /* Staggered animation for skills grid */
-@utility stagger-skills .skill-card:nth-child(1) { animation-delay: 0.1s; }
-@utility stagger-skills .skill-card:nth-child(2) { animation-delay: 0.2s; }
-@utility stagger-skills .skill-card:nth-child(3) { animation-delay: 0.3s; }
-@utility stagger-skills .skill-card:nth-child(4) { animation-delay: 0.4s; }
-@utility stagger-skills .skill-card:nth-child(5) { animation-delay: 0.5s; }
-@utility stagger-skills .skill-card:nth-child(6) { animation-delay: 0.6s; }
-@utility stagger-skills .skill-card:nth-child(7) { animation-delay: 0.7s; }
-@utility stagger-skills .skill-card:nth-child(8) { animation-delay: 0.8s; }
-@utility stagger-skills .skill-card:nth-child(9) { animation-delay: 0.9s; }
+.stagger-skills .skill-card:nth-child(1) { animation-delay: 0.1s; }
+.stagger-skills .skill-card:nth-child(2) { animation-delay: 0.2s; }
+.stagger-skills .skill-card:nth-child(3) { animation-delay: 0.3s; }
+.stagger-skills .skill-card:nth-child(4) { animation-delay: 0.4s; }
+.stagger-skills .skill-card:nth-child(5) { animation-delay: 0.5s; }
+.stagger-skills .skill-card:nth-child(6) { animation-delay: 0.6s; }
+.stagger-skills .skill-card:nth-child(7) { animation-delay: 0.7s; }
+.stagger-skills .skill-card:nth-child(8) { animation-delay: 0.8s; }
+.stagger-skills .skill-card:nth-child(9) { animation-delay: 0.9s; }
 
 /* Enhanced responsive design for skills section */
 @media (max-width: 768px) {
   .skills-section {
     padding: 3rem 1rem;
   }
-  
+
   .skills-title {
     font-size: 2rem;
     line-height: 1.2;
   }
-  
+
   .skills-subtitle {
     font-size: 1rem;
   }
-  
+
   .category-buttons {
     gap: 0.5rem;
   }
-  
+
   .category-button {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
   }
-  
+
   .skill-stats {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -827,17 +733,93 @@ html {
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
 }
 
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-  .skill-card-enhanced,
-  .category-button,
-  .progress-animated {
-    animation: none;
-    transition: none;
+/* Dark mode specific styles for cosmic elements */
+.dark .star {
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(167, 139, 250, 0.4) 100%);
+  box-shadow:
+    0 0 6px 2px rgba(255, 255, 255, 0.6),
+    0 0 12px 4px rgba(167, 139, 250, 0.4),
+    0 0 18px 6px rgba(139, 92, 246, 0.2);
+}
+
+.dark .meteor {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(167, 139, 250, 0.9) 30%,
+    rgba(139, 92, 246, 0.7) 60%,
+    transparent 100%);
+  box-shadow:
+    0 0 10px 3px rgba(255, 255, 255, 0.8),
+    0 0 20px 6px rgba(167, 139, 250, 0.6),
+    0 0 30px 9px rgba(139, 92, 246, 0.4);
+}
+
+.dark .shooting-star {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%);
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
+}
+
+.dark .nebula {
+  background: radial-gradient(ellipse,
+    rgba(139, 92, 246, 0.1) 0%,
+    rgba(167, 139, 250, 0.05) 50%,
+    transparent 100%);
+}
+
+/* Enhanced loading states */
+.skeleton {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+/* Enhanced error states */
+.error-state {
+  @apply text-red-500 border-red-500/50 bg-red-500/10;
+}
+
+/* Improved success states */
+.success-state {
+  @apply text-green-500 border-green-500/50 bg-green-500/10;
+}
+
+/* Improved backdrop filter support */
+@supports (backdrop-filter: blur(12px)) {
+  .backdrop-blur-enhanced {
+    backdrop-filter: blur(12px);
   }
-  
-  .skill-card-enhanced:hover {
-    transform: none;
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  .backdrop-blur-enhanced {
+    background-color: rgba(var(--background), 0.95);
+  }
+}
+
+/* Enhanced mobile navigation z-index management */
+.mobile-nav-overlay {
+  z-index: 40;
+}
+
+.mobile-nav-content {
+  z-index: 41;
+}
+
+/* Improved touch targets for mobile */
+@media (max-width: 767px) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .mobile-menu-item {
+    min-height: 48px;
   }
 }
 
@@ -850,4 +832,18 @@ html {
 .skill-card-enhanced:focus-visible {
   outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .skill-card-enhanced,
+  .category-button,
+  .progress-animated {
+    animation: none;
+    transition: none;
+  }
+
+  .skill-card-enhanced:hover {
+    transform: none;
+  }
 }
