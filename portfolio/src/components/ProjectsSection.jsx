@@ -5,7 +5,7 @@ const projects = [
     id: 1,
     title: "Majestic Fragrance - E-commerce Website",
     description: "A complete online store for luxury perfume brand built with MERN stack. Features product catalog, shopping cart, secure checkout flow, and modern responsive design.",
-    image: "/projects/majestic-fragrance.png", // You'll need to add this image
+    image: "./majestic.png", // You'll need to add this image
     tags: ["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind CSS"],
     demoUrl: "https://www.majesticfragrances-eg.com",
     githubUrl: "https://github.com/Amrelkadyy/Perfumes-website",
@@ -17,7 +17,7 @@ const projects = [
     id: 2,
     title: "SmartTrips - Travel Website",
     description: "Full-stack travel website with dynamic trip listings, booking system, and user management. Features personalized travel recommendations and integrated chatbot with NLP.",
-    image: "/projects/smarttrips.png", // You'll need to add this image
+    image: "./smarttrips.png", // You'll need to add this image
     tags: ["Laravel", "HTML", "CSS", "JavaScript", "SCSS", "NLP", "APIs"],
     demoUrl: "https://github.com/Amrelkadyy/Travel-Project-SmartTrips-", // Update with actual Vercel link
     githubUrl: "https://github.com/Amrelkadyy/Travel-Project-SmartTrips-",
@@ -30,7 +30,7 @@ const projects = [
     id: 3,
     title: "Laravel E-commerce Platform",
     description: "Training-based e-commerce platform featuring comprehensive user authentication, advanced cart system, and powerful admin dashboard for inventory management.",
-    image: "/projects/laravel-ecommerce.png", // You'll need to add this image
+    image: "./e-commerce.png", // You'll need to add this image
     tags: ["Laravel", "PHP", "MySQL", "Blade", "Bootstrap"],
     demoUrl: "https://github.com/Amrelkadyy/E-commerce-laravel-project", // Update with actual Vercel link
     githubUrl: "https://github.com/Amrelkadyy/E-commerce-laravel-project",
