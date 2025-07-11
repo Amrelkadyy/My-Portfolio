@@ -19,7 +19,7 @@ const projects = [
     description: "Full-stack travel website with dynamic trip listings, booking system, and user management. Features personalized travel recommendations and integrated chatbot with NLP.",
     image: "/projects/smarttrips.png", // You'll need to add this image
     tags: ["Laravel", "HTML", "CSS", "JavaScript", "SCSS", "NLP", "APIs"],
-    demoUrl: "https://travel-project-smarttrips.vercel.app", // Update with actual Vercel link
+    demoUrl: "https://github.com/Amrelkadyy/Travel-Project-SmartTrips-", // Update with actual Vercel link
     githubUrl: "https://github.com/Amrelkadyy/Travel-Project-SmartTrips-",
     year: "2024",
     type: "Graduation Project",
@@ -32,7 +32,7 @@ const projects = [
     description: "Training-based e-commerce platform featuring comprehensive user authentication, advanced cart system, and powerful admin dashboard for inventory management.",
     image: "/projects/laravel-ecommerce.png", // You'll need to add this image
     tags: ["Laravel", "PHP", "MySQL", "Blade", "Bootstrap"],
-    demoUrl: "https://laravel-ecommerce-amr.vercel.app", // Update with actual Vercel link
+    demoUrl: "https://github.com/Amrelkadyy/E-commerce-laravel-project", // Update with actual Vercel link
     githubUrl: "https://github.com/Amrelkadyy/E-commerce-laravel-project",
     year: "2024",
     type: "Training Project",
@@ -44,7 +44,7 @@ const projects = [
     description: "Responsive, modern landing page created during NTI web design course. Focused on clean layout design, visual hierarchy, and mobile-first responsiveness.",
     image: "/projects/fokir.png", // You'll need to add this image
     tags: ["HTML", "CSS", "JavaScript", "Bootstrap", "Responsive Design"],
-    demoUrl: "https://fokir-landing-page.vercel.app", // Update with actual Vercel link
+    demoUrl: "https://github.com/Amrelkadyy/fokir-landing-page", // Update with actual Vercel link
     githubUrl: "https://github.com/Amrelkadyy/fokir-landing-page", // Update with actual repo
     year: "2025",
     type: "Course Project",
@@ -56,7 +56,7 @@ const projects = [
     description: "Responsive bookstore interface with interactive layout and clean design. Features book browsing, search functionality, and modern UI components.",
     image: "/projects/bookstore.png", // You'll need to add this image
     tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
-    demoUrl: "https://bookstore-frontend-amr.vercel.app", // Update with actual Vercel link
+    demoUrl: "https://github.com/Amrelkadyy/bookstore-frontend", // Update with actual Vercel link
     githubUrl: "https://github.com/Amrelkadyy/bookstore-frontend", // Update with actual repo
     year: "2023",
     type: "Personal Project",

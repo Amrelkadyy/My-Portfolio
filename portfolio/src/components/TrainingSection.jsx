@@ -59,7 +59,7 @@ const trainings = [
 
 export const TrainingSection = () => {
   return (
-    <section id="training" className="py-24 px-4 relative bg-background">
+    <section id="training" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <div className="text-center mb-16 space-y-4">
