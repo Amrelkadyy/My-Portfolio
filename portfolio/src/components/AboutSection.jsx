@@ -82,7 +82,7 @@ export const AboutSection = () => {
                 <span className="relative z-10">Get In Touch</span>
               </a>
               <a
-                href="../assets/amr's cv.pdf" 
+                href="/amr's cv.pdf" 
                 download
                 className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border-2 border-primary/30 text-primary hover:bg-primary/10 hover:border-primary transition-all duration-300 hover:scale-105 active:scale-95"
               >

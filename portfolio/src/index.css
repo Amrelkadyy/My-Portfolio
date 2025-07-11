@@ -21,6 +21,8 @@
   --animate-shooting-star: shooting-star 3s linear infinite;
   --animate-nebula: nebula 15s ease-in-out infinite;
   --animate-cosmic-drift: cosmic-drift 20s ease-in-out infinite;
+  --animate-grow: grow 1.5s ease-out forwards;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -195,6 +197,28 @@
       background-position: calc(200px + 100%) 0;
     }
   }
+
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 @layer base {
@@ -247,7 +271,6 @@
       padding-top: 6rem;
       min-height: calc(100vh - 4rem);
     }
-
     html {
       scroll-padding-top: 4rem;
     }
@@ -431,6 +454,7 @@
 @utility smooth-transition {
   @apply transition-all duration-300 ease-out;
 }
+
 @utility focus-ring {
   @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
 }
@@ -449,6 +473,87 @@
   @media (max-width: 767px) {
     display: none !important;
   }
+}
+
+@utility training-card {
+  @apply relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl;
+  @apply transition-all duration-500;
+}
+
+@utility skill-tag {
+  @apply px-3 py-1 text-xs font-medium bg-secondary/70 text-foreground rounded-full;
+  @apply border border-border/50 transition-all duration-300;
+}
+
+@utility highlight-dot {
+  @apply w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0;
+}
+
+@utility line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+@utility line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@utility project-card-hover {
+  @apply transition-all duration-500;
+  transform-origin: center;
+}
+
+@utility project-title-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    rgb(168, 85, 247) 50%, 
+    rgb(236, 72, 153) 100%
+  );
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@utility tech-tag {
+  @apply transition-all duration-300;
+}
+
+@utility project-image-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent;
+  @apply opacity-0 transition-opacity duration-300;
+}
+
+@utility project-image-skeleton {
+  @apply bg-gradient-to-r from-secondary/50 via-secondary/30 to-secondary/50;
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@utility project-link-focus {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  @apply focus:ring-offset-background rounded-md;
+}
+
+@utility project-card-border {
+  @apply border border-border/30 transition-all duration-300;
+  background: linear-gradient(135deg, 
+    rgba(var(--card), 0.6) 0%, 
+    rgba(var(--card), 0.4) 100%
+  );
+}
+
+@utility category-badge {
+  @apply px-3 py-1 rounded-full text-xs font-medium;
+  @apply bg-primary/10 text-primary border border-primary/20;
+  @apply transition-all duration-300;
 }
 
 /* Regular CSS classes for hover states and complex selectors */
@@ -516,6 +621,57 @@
   border-color: hsl(var(--border));
 }
 
+.training-card:hover {
+  background: hsl(var(--card) / 0.7);
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1), 0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+.skill-tag:hover {
+  background: hsl(var(--primary) / 0.1);
+  border-color: hsl(var(--primary) / 0.3);
+  transform: scale(1.05);
+}
+
+.project-card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1), 0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+.tech-tag:hover {
+  transform: scale(1.1) rotate(1deg);
+}
+
+.project-image-overlay:hover {
+  opacity: 1;
+}
+
+.project-card-border:hover {
+  border-color: hsl(var(--primary) / 0.5);
+}
+
+.category-badge:hover {
+  background: hsl(var(--primary) / 0.2);
+  border-color: hsl(var(--primary) / 0.4);
+}
+
+.category-badge.featured {
+  @apply bg-gradient-to-r from-primary/20 to-purple-500/20;
+  @apply text-primary border-primary/30;
+}
+
+.category-badge.personal {
+  @apply bg-green-500/10 text-green-500 border-green-500/20;
+}
+
+.category-badge.training {
+  @apply bg-blue-500/10 text-blue-500 border-blue-500/20;
+}
+
+.category-badge.graduation {
+  @apply bg-yellow-500/10 text-yellow-500 border-yellow-500/20;
+}
+
 /* Prevent scroll when menu is open */
 .menu-open {
   overflow: hidden !important;
@@ -546,16 +702,64 @@
   }
 }
 
-/* Improved responsive text sizing */
+/* Staggered animation for project cards */
+.project-card:nth-child(1) {
+  animation: slideInUp 0.6s ease-out 0.1s both;
+}
+
+.project-card:nth-child(2) {
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.project-card:nth-child(3) {
+  animation: slideInUp 0.6s ease-out 0.3s both;
+}
+
+.project-card:nth-child(4) {
+  animation: slideInUp 0.6s ease-out 0.4s both;
+}
+
+.project-card:nth-child(5) {
+  animation: slideInUp 0.6s ease-out 0.5s both;
+}
+
+.project-stat {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* Enhanced mobile responsiveness for projects */
+@media (max-width: 640px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .project-card {
+    margin-bottom: 1rem;
+  }
+  
+  .project-image {
+    height: 200px;
+  }
+  
+  .project-tags {
+    gap: 0.25rem;
+  }
+  
+  .project-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* Enhanced responsive text sizing */
 @media (max-width: 640px) {
   .nav-logo {
     height: 2rem;
   }
-
   .nav-title {
     font-size: 0.875rem;
   }
-
   .mobile-menu-text {
     font-size: 1rem;
   }
@@ -565,11 +769,9 @@
   .nav-logo {
     height: 2.5rem;
   }
-
   .nav-title {
     font-size: 1rem;
   }
-
   .mobile-menu-text {
     font-size: 1.125rem;
   }
@@ -582,38 +784,14 @@
     min-height: 100vh;
     min-height: 100dvh;
   }
-
   .mobile-menu-content {
     @apply max-w-sm mx-auto;
   }
-
   .mobile-menu-items {
     @apply space-y-3;
     max-height: calc(100vh - 200px);
     max-height: calc(100dvh - 200px);
     overflow-y: auto;
-  }
-}
-
-/* Safe area padding for mobile devices with notches */
-@supports (padding: max(0px)) {
-  .mobile-menu-container {
-    padding-top: max(5rem, env(safe-area-inset-top) + 1rem);
-    padding-bottom: max(2rem, env(safe-area-inset-bottom) + 1rem);
-    padding-left: max(1rem, env(safe-area-inset-left) + 1rem);
-    padding-right: max(1rem, env(safe-area-inset-right) + 1rem);
-  }
-}
-
-/* Prevent horizontal scroll on mobile */
-@media (max-width: 767px) {
-  body {
-    overflow-x: hidden;
-  }
-
-  .mobile-menu-backdrop {
-    @apply fixed inset-0 bg-background/95 backdrop-blur-xl;
-    touch-action: none;
   }
 }
 
@@ -637,17 +815,14 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-
   .skill-card {
     padding: 1rem;
   }
-
   .skill-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
   }
-
   .skill-icon {
     width: 1rem;
     height: 1rem;
@@ -670,25 +845,20 @@
   .skills-section {
     padding: 3rem 1rem;
   }
-
   .skills-title {
     font-size: 2rem;
     line-height: 1.2;
   }
-
   .skills-subtitle {
     font-size: 1rem;
   }
-
   .category-buttons {
     gap: 0.5rem;
   }
-
   .category-button {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
   }
-
   .skill-stats {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -707,143 +877,467 @@
   }
 }
 
-/* Dark mode specific enhancements for skills */
-.dark .skill-card-enhanced {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+/* Enhanced responsive design for training section */
+@media (max-width: 640px) {
+  .training-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .training-card {
+    padding: 1.5rem;
+  }
+  .training-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .training-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .training-title {
+    font-size: 1.125rem;
+  }
+  .training-institution {
+    font-size: 0.875rem;
+  }
+  .training-date {
+    font-size: 0.75rem;
+  }
 }
 
-.dark .skill-card-enhanced:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(139, 92, 246, 0.3);
+@media (min-width: 641px) and (max-width: 1024px) {
+  .training-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.dark .category-button {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+/* Enhanced responsive design for about section */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 3rem 1rem;
+  }
+  .about-content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .about-text {
+    order: 2;
+  }
+  .about-image {
+    order: 1;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .stat-card {
+    padding: 1rem;
+  }
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+  }
 }
 
-.dark .category-button:hover {
-  background: rgba(255, 255, 255, 0.1);
+/* Enhanced responsive design for contact section */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 3rem 1rem;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .contact-form {
+    order: 1;
+  }
+  .contact-info {
+    order: 2;
+  }
+  .contact-item {
+    padding: 1rem;
+  }
+  .contact-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
 }
 
-.dark .category-button.active {
-  background: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+/* Enhanced form styling */
+.form-group {
+  @apply space-y-2;
 }
 
-/* Dark mode specific styles for cosmic elements */
-.dark .star {
-  background: radial-gradient(circle,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 50%,
-    rgba(167, 139, 250, 0.4) 100%);
-  box-shadow:
-    0 0 6px 2px rgba(255, 255, 255, 0.6),
-    0 0 12px 4px rgba(167, 139, 250, 0.4),
-    0 0 18px 6px rgba(139, 92, 246, 0.2);
+.form-label {
+  @apply block text-sm font-medium text-foreground;
 }
 
-.dark .meteor {
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(167, 139, 250, 0.9) 30%,
-    rgba(139, 92, 246, 0.7) 60%,
-    transparent 100%);
-  box-shadow:
-    0 0 10px 3px rgba(255, 255, 255, 0.8),
-    0 0 20px 6px rgba(167, 139, 250, 0.6),
-    0 0 30px 9px rgba(139, 92, 246, 0.4);
+.form-input {
+  @apply w-full px-4 py-3 rounded-xl border border-border/50;
+  @apply bg-card/50 backdrop-blur-sm text-foreground;
+  @apply transition-all duration-300;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/50;
+  @apply focus:border-primary/50 focus:bg-card/70;
 }
 
-.dark .shooting-star {
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.8) 50%,
-    transparent 100%);
-  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8);
+.form-textarea {
+  @apply form-input resize-none;
+  min-height: 120px;
 }
 
-.dark .nebula {
-  background: radial-gradient(ellipse,
-    rgba(139, 92, 246, 0.1) 0%,
-    rgba(167, 139, 250, 0.05) 50%,
-    transparent 100%);
+.form-button {
+  @apply w-full px-6 py-3 rounded-xl font-medium;
+  @apply bg-primary text-primary-foreground;
+  @apply transition-all duration-300;
+  @apply hover:bg-primary/90 hover:scale-105;
+  @apply active:scale-95;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/50;
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
 /* Enhanced loading states */
-.skeleton {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  background-size: 200px 100%;
-  animation: skeleton-loading 1.5s infinite;
+.loading-spinner {
+  @apply animate-spin rounded-full border-2 border-border;
+  @apply border-t-primary;
+}
+
+.loading-skeleton {
+  @apply bg-secondary/50 animate-pulse rounded;
+}
+
+.loading-text {
+  @apply loading-skeleton h-4;
+}
+
+.loading-title {
+  @apply loading-skeleton h-6;
+}
+
+.loading-card {
+  @apply loading-skeleton h-32;
 }
 
 /* Enhanced error states */
-.error-state {
-  @apply text-red-500 border-red-500/50 bg-red-500/10;
+.error-message {
+  @apply text-red-500 text-sm mt-1;
 }
 
-/* Improved success states */
-.success-state {
-  @apply text-green-500 border-green-500/50 bg-green-500/10;
+.error-input {
+  @apply border-red-500/50 focus:border-red-500 focus:ring-red-500/50;
 }
 
-/* Improved backdrop filter support */
-@supports (backdrop-filter: blur(12px)) {
-  .backdrop-blur-enhanced {
-    backdrop-filter: blur(12px);
+.success-message {
+  @apply text-green-500 text-sm mt-1;
+}
+
+.success-input {
+  @apply border-green-500/50 focus:border-green-500 focus:ring-green-500/50;
+}
+
+/* Enhanced accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-primary/50 ring-offset-2 ring-offset-background;
+}
+
+/* Enhanced print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .card, .skill-card, .project-card, .training-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
   }
 }
 
-@supports not (backdrop-filter: blur(12px)) {
-  .backdrop-blur-enhanced {
-    background-color: rgba(var(--background), 0.95);
-  }
-}
-
-/* Enhanced mobile navigation z-index management */
-.mobile-nav-overlay {
-  z-index: 40;
-}
-
-.mobile-nav-content {
-  z-index: 41;
-}
-
-/* Improved touch targets for mobile */
-@media (max-width: 767px) {
-  .touch-target {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  .mobile-menu-item {
-    min-height: 48px;
-  }
-}
-
-/* Focus states for accessibility */
-.category-button:focus-visible {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
-}
-
-.skill-card-enhanced:focus-visible {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
-}
-
-/* Accessibility improvements */
+/* Enhanced reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .skill-card-enhanced,
-  .category-button,
-  .progress-animated {
-    animation: none;
-    transition: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+  
+  .parallax {
+    transform: none !important;
+  }
+}
 
-  .skill-card-enhanced:hover {
-    transform: none;
+/* Enhanced high contrast support */
+@media (prefers-contrast: high) {
+  .card, .skill-card, .project-card, .training-card {
+    border-width: 2px;
   }
+  
+  .button, .form-button {
+    border: 2px solid currentColor;
+  }
+  
+  .text-muted {
+    opacity: 1;
+  }
+}
+
+/* Enhanced dark mode improvements */
+@media (prefers-color-scheme: dark) {
+  .glass-effect {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .shadow-enhanced {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Final utility classes */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.aspect-portrait {
+  aspect-ratio: 3 / 4;
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.container-narrow {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.container-wide {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Enhanced scroll behavior */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+.scroll-snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-start {
+  scroll-snap-align: start;
+}
+
+.scroll-snap-center {
+  scroll-snap-align: center;
+}
+
+/* Enhanced visibility utilities */
+.visible {
+  visibility: visible;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+/* Enhanced positioning utilities */
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+/* Enhanced overflow utilities */
+.overflow-x-auto {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.overflow-y-auto {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
+}
+
+/* Enhanced text utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-break {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Enhanced interaction utilities */
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.select-text {
+  user-select: text;
+}
+
+.select-all {
+  user-select: all;
+}
+
+/* Enhanced cursor utilities */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-wait {
+  cursor: wait;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+/* Final responsive breakpoint utilities */
+@media (max-width: 479px) {
+  .xs\:hidden { display: none !important; }
+  .xs\:block { display: block !important; }
+  .xs\:flex { display: flex !important; }
+  .xs\:grid { display: grid !important; }
+  .xs\:text-xs { font-size: 0.75rem !important; }
+  .xs\:text-sm { font-size: 0.875rem !important; }
+  .xs\:p-2 { padding: 0.5rem !important; }
+  .xs\:p-4 { padding: 1rem !important; }
+  .xs\:gap-2 { gap: 0.5rem !important; }
+  .xs\:gap-4 { gap: 1rem !important; }
+}
+
+/* Enhanced component state utilities */
+.is-loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.is-disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.is-active {
+  @apply bg-primary/10 text-primary border-primary/30;
+}
+
+.is-selected {
+  @apply bg-primary text-primary-foreground;
+}
+
+.is-error {
+  @apply border-red-500/50 bg-red-500/5;
+}
+
+.is-success {
+  @apply border-green-500/50 bg-green-500/5;
+}
+
+.is-warning {
+  @apply border-yellow-500/50 bg-yellow-500/5;
+}
+
+.is-info {
+  @apply border-blue-500/50 bg-blue-500/5;
 }
